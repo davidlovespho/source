@@ -11,11 +11,17 @@ import (
 
 // Connection details
 var (
-	Hostname = ""
-	Port     = 2345
-	Username = ""
-	Password = ""
-	Database = ""
+Hostname = "localhost"
+Port = 5433
+Username = "postgres"
+Password = "root"
+Database = "go"
+	
+// 	Hostname = ""
+// 	Port     = 2345
+// 	Username = ""
+// 	Password = ""
+// 	Database = ""
 )
 
 // Userdata is for holding full user data
