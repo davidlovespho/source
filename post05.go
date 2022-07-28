@@ -60,7 +60,7 @@ func exists(username string) int {
 	defer db.Close()
 
 	userID := -1
-	statement := fmt.Sprintf(`SELECT "id" FROM "COURSE" where username = '%s'`, username)
+	statement := fmt.Sprintf(`SELECT "id" FROM "course" where username = '%s'`, username)
 	rows, err := db.Query(statement)
 
 	for rows.Next() {
@@ -95,7 +95,7 @@ func AddUser(d Userdata) int {
 		return -1
 	}
 
-	insertStatement := `insert into "COURSE" ("username") values ($1)`
+	insertStatement := `insert into "course" ("username") values ($1)`
 	_, err = db.Exec(insertStatement, d.Username)
 	if err != nil {
 		fmt.Println(err)
@@ -107,7 +107,7 @@ func AddUser(d Userdata) int {
 		return userID
 	}
 
-	insertStatement = `insert into "COURSE_DATA" ("userid", "name", "surname", "description")
+	insertStatement = `insert into "course_data" ("userid", "name", "surname", "description")
 	values ($1, $2, $3, $4)`
 	_, err = db.Exec(insertStatement, userID, d.Name, d.Surname, d.Description)
 	if err != nil {
@@ -127,7 +127,7 @@ func DeleteUser(id int) error {
 	defer db.Close()
 
 	// Does the ID exist?
-	statement := fmt.Sprintf(`SELECT "username" FROM "COURSE" where id = %d`, id)
+	statement := fmt.Sprintf(`SELECT "username" FROM "course" where id = %d`, id)
 	rows, err := db.Query(statement)
 
 	var username string
@@ -144,14 +144,14 @@ func DeleteUser(id int) error {
 	}
 
 	// Delete from Userdata
-	deleteStatement := `delete from "COURSE_DATA" where userid=$1`
+	deleteStatement := `delete from "course_data" where userid=$1`
 	_, err = db.Exec(deleteStatement, id)
 	if err != nil {
 		return err
 	}
 
 	// Delete from Users
-	deleteStatement = `delete from "COURSE" where id=$1`
+	deleteStatement = `delete from "course" where id=$1`
 	_, err = db.Exec(deleteStatement, id)
 	if err != nil {
 		return err
@@ -170,8 +170,8 @@ func ListUsers() ([]Userdata, error) {
 	defer db.Close()
 
 	rows, err := db.Query(`SELECT "id","username","name","surname","description"
-		FROM "COURSE","COURSE_DATA"
-		WHERE COURSE.id = COURSE_DATA.userid`)
+		FROM "course","course_data"
+		WHERE course.id = course_data.userid`)
 	if err != nil {
 		return Data, err
 	}
@@ -206,7 +206,7 @@ func UpdateUser(d Userdata) error {
 		return errors.New("User does not exist")
 	}
 	d.ID = userID
-	updateStatement := `update "COURSE_DATA" set "name"=$1, "surname"=$2, "description"=$3 where "userid"=$4`
+	updateStatement := `update "course_data" set "name"=$1, "surname"=$2, "description"=$3 where "userid"=$4`
 	_, err = db.Exec(updateStatement, d.Name, d.Surname, d.Description, d.ID)
 	if err != nil {
 		return err
