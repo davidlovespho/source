@@ -15,7 +15,7 @@ Hostname = "localhost"
 Port = 5433
 Username = "postgres"
 Password = "root"
-Database = "go"
+Database = "msds"
 	
 // 	Hostname = ""
 // 	Port     = 2345
