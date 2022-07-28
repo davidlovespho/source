@@ -11,17 +11,17 @@ import (
 
 // Connection details
 var (
-// Hostname = "localhost"
-// Port = 5433
-// Username = "postgres"
-// Password = "root"
-// Database = "msds"
+Hostname = "localhost"
+Port = 5433
+Username = "postgres"
+Password = "root"
+Database = "msds"
 	
-	Hostname = ""
-	Port     = 2345
-	Username = ""
-	Password = ""
-	Database = ""
+// 	Hostname = ""
+// 	Port     = 2345
+// 	Username = ""
+// 	Password = ""
+// 	Database = ""
 )
 
 // Userdata is for holding full user data
