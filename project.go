@@ -1,5 +1,23 @@
 package project
 
+import (
+    "encoding/json"
+    "fmt"
+    //"io/ioutil"
+    "log"
+    "database/sql"
+	//"errors"
+	_ "github.com/lib/pq"
+	"strconv"
+	"net/http"
+	"io"
+)
+
+type Zipcode_CCVI struct {
+    Community_area_or_zip  string 
+    Ccvi_category string
+}
+
 var (
 	Hostname = ""
 	Port     = 2345
